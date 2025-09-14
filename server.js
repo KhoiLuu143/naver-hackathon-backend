@@ -25,7 +25,7 @@ app.post("/api/analyzeTasks", async (req, res) => {
     const taskText = tasks
       .map(t => {
         const title = t.title ?? "(no title)";
-        const completed = t.completed ? "✅ Hoàn thành" : "❌ Chưa xong";
+        const completed = t.completed ? "Hoàn thành" : "Chưa xong";
         const due = t.dueDate ?? "no-deadline";
         const priority = t.priority ?? "medium";
         return `- ${title} | ${completed} | Priority: ${priority} | Deadline: ${due}`;
@@ -58,4 +58,8 @@ ${taskText}
     console.error("AI backend error:", err);
     return res.status(500).json({ error: "AI request failed", details: err?.message || err });
   }
+});
+
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
